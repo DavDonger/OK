@@ -13,7 +13,7 @@ def generate_city_names(num_cities):
         return names
 
 def generate_agent_data(num_cities):
-        thief_stamina = random.randint(10, 20)
+        thief_stamina = 150 # Stamina of the thief
         thief_start_city = random.randint(0, num_cities - 1)
         thief_getaway_city = random.choice([c for c in range(num_cities) if c != thief_start_city])
         thief_name = "T"
@@ -21,7 +21,7 @@ def generate_agent_data(num_cities):
         
         detective_lines = []
         for i in range(1, 5):
-            stamina = 150
+            stamina = 150 # Stamina of the detectives
             start_city = random.randint(0, num_cities - 1)
             strategy = random.randint(0, 2)
             detective_name = f"D{i}"
@@ -31,8 +31,8 @@ def generate_agent_data(num_cities):
         return agent_data
 
 # Number of files you want to create
-for i in range(1, 20000):
-    num_cities = 1000
+for i in range(1, 1000):
+    num_cities = 100 # Number of cities in each case
     agent_data = generate_agent_data(num_cities)
 
     with open(f'data/agents/agentData_{i}.data', 'w') as file:
@@ -42,11 +42,11 @@ for i in range(1, 20000):
 
     graph_data = []
     for city_id in range(num_cities):
-        num_connections = random.randint(1, 3)
+        num_connections = random.randint(1, 5) # Number of roads out of each cities (1 to 5)
         connections = []
         connected_cities = random.sample([i for i in range(num_cities) if i != city_id], num_connections)
         for connected_city in connected_cities:
-            road_length = random.randint(10, 100)
+            road_length = random.randint(10, 100) # Random road length 10 to 100
             connections.extend([connected_city, road_length])
         # LEAVE AS IS IF TASK 3 IS NOT DONE - SWAP THE COMMENTS IF YOU WANT TO TEST TASK 3
         has_informant = 'n' # 'i' if random.random() < 0.3 else 'n'
